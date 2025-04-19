@@ -29,8 +29,8 @@ Module Orchestrator
             ETLforJSON(healthData)
 
             ' --- STEP 3: Push to Display/Graph ---
-            Console.WriteLine("Pushing to Grafana...")
-            ' TODO: Grafana/database logic
+            Console.WriteLine("Pushing to Supabase DB...")
+            ' HELP ME HERE
 
         Catch ex As Exception
             Console.WriteLine($"Fatal error: {ex.Message}")

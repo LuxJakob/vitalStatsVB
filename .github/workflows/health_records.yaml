@@ -1,0 +1,30 @@
+name: Data Sync
+on: [push]
+
+jobs:
+  sync-data:
+    runs-on: windows-latest
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Run Data Sync
+      run: dotnet run --project vitalStatsVB/vitalStatsVB.vbproj
+
+    - name: Archive Supabase logs
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: supabase-logs
+        path: supabase_logs_*.txt
