@@ -1,11 +1,19 @@
 ﻿Imports Microsoft.VisualBasic.FileIO
+Imports System.IO
 
 Public Module ParseCSV
-    Public Function ReadCSV(filePath As String) As List(Of HealthRecord)
+    Public Function ReadCSV() As List(Of HealthRecord)
+
+        Dim healthFile As String = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "plasma_donation_testdata.csv")
+
+        If Not File.Exists(healthFile) Then
+            Console.WriteLine("ERROR: CSV file not found!")
+            Throw New Exception("ERROR: CSV file not found!")
+        End If
         Dim records As New List(Of HealthRecord)()
 
         Try
-            Using parser As New TextFieldParser(filePath)
+            Using parser As New TextFieldParser(healthFile)
                 parser.TextFieldType = FieldType.Delimited
                 parser.SetDelimiters(",")
                 parser.HasFieldsEnclosedInQuotes = True

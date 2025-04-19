@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <None Update="plasma_donation_testdata.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
