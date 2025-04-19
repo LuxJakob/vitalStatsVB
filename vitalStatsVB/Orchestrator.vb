@@ -1,4 +1,5 @@
 ﻿Imports System
+Imports System.Text.Json
 
 Module Orchestrator
     Sub Main(args As String())
@@ -7,7 +8,6 @@ Module Orchestrator
         Try
             ' --- STEP 1: Load CSV ---
             Console.WriteLine("Loading CSV file...")
-
 
             Dim projectDir As String = AppDomain.CurrentDomain.BaseDirectory
             Dim healthFile As String = "plasma_donation_testdata.csv"
@@ -25,8 +25,8 @@ Module Orchestrator
             Next
 
             ' --- STEP 2: ETL Process ---
-            Console.WriteLine($"ETL: Processed {healthData.Count} records.")
-            ' TODO: transformations (e.g., filter outliers, calculate averages).
+            Console.WriteLine($"ETL: Processes {healthData.Count} records.")
+            ETLforJSON(healthData)
 
             ' --- STEP 3: Push to Display/Graph ---
             Console.WriteLine("Pushing to Grafana...")

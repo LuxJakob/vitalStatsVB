@@ -21,7 +21,7 @@ Public Module ParseCSV
                         .Timestamp = DateTime.Parse(fields(0)),
                         .Weight = Double.Parse(fields(1)),
                         .AmountDonated = Integer.Parse(fields(2)),
-                        .BloodPressure = $"{fields(3)}/{fields(4)}"
+                        .BloodPressure = fields(3)
                     }
                     records.Add(record)
                 End While
