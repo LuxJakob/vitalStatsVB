@@ -7,19 +7,20 @@
             Console.WriteLine("Loading CSV file...")
 
             Dim healthData = ParseCSV.ReadCSV()
-            For Each record In healthData
-                Console.WriteLine($"{record.Timestamp:yyyy-MM-dd}: " &
-                      $"Weight = {record.Weight} kg, " &
-                      $"BP = {record.BloodPressure}")
-            Next
 
             ' --- STEP 2: ETL Process ---
             Console.WriteLine($"ETL: Processes {healthData.Count} records.")
             ETLforJSON(healthData)
 
-            ' --- STEP 3: Push to Display/Graph ---
+            ' --- STEP 3: Supabase Database ---
+            Console.WriteLine("Initializing Supabase client...")
+            SupabaseClient.Initialize().GetAwaiter().GetResult()
+
             Console.WriteLine("Pushing to Supabase DB...")
-            ' HELP ME HERE
+            Dim success = SupabaseClient.UpsertHealthData(healthData).GetAwaiter().GetResult()
+
+            ' --- STEP 4: Visualize ---
+            ' TODO
 
         Catch ex As Exception
             Console.WriteLine($"Fatal error: {ex.Message}")

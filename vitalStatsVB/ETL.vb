@@ -1,4 +1,5 @@
 ﻿Imports System.Text.Json
+Imports System.IO
 
 Public Module ETL
     Public Sub ETLforJSON(healthData As List(Of HealthRecord))
@@ -10,8 +11,8 @@ Public Module ETL
         Dim json As String = JsonSerializer.Serialize(healthData, options)
 
         Dim jsonPath As String = "health_data.json"
-        System.IO.File.WriteAllText(jsonPath, json)
-        Console.WriteLine($"Saved JSON to: {System.IO.Path.GetFullPath(jsonPath)}")
+        File.WriteAllText(jsonPath, json)
+        Console.WriteLine($"Saved JSON to: {Path.GetFullPath(jsonPath)}")
 
     End Sub
 
